@@ -1,0 +1,48 @@
+#game {
+    width: 75vmin;
+    height: 75vmin;
+    border: 2px solid #CCC1B4;
+    border-radius: 1vmin;
+    background: #CCC1B4;
+    position: relative;
+    font-size: 12vmin;
+    margin:auto;
+}
+#game>div {
+    box-sizing:border-box;
+    border-radius: 1vmin;
+    transition: top .5s, left .5s;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #CCC1B4;
+    height: 25%;
+    width: 25%;
+    color: white;
+}
+#game>div::before{
+    content: attr(data-value);
+}
+@keyframes pop {
+    0%   {transform: scale(0); }
+    50%  {transform: scale(1.2); }
+    100% {transform: scale(1); }
+}
+
+[data-value="0"]    { display :none !important;}
+[data-value="2"]    { background-color: #EEE4DA}
+[data-value="4"]    { background-color: #EDE0C8;}
+[data-value="8"]    { background-color: #F2B179;}
+[data-value="16"]   { background-color: #F59563;}
+[data-value="32"]   { background-color: #E07157;}
+[data-value="64"]   { background-color: #F5613C;}
+[data-value="128"]  { background-color: #D5BA66;}
+[data-value="256"]  { background-color: #EDCC62;}
+[data-value="512"]  { background-color: #EDCC62;}
+[data-value="1024"] { background-color: #EDCC62;
+    font-size: .7em;
+}
+[data-value="2048"] { background-color: #EDCC62;
+    font-size: .7em;
+}
