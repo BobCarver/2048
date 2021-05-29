@@ -5,7 +5,7 @@
     border-radius: 1vmin;
     background: #CCC1B4;
     position: relative;
-    font-size: 12vmin;
+    font-size: 11vmin;
     margin:auto;
 }
 #game>div {
@@ -20,13 +20,14 @@
     height: 25%;
     width: 25%;
     color: white;
+    animation: pop 2s;
 }
 #game>div::before{
     content: attr(data-value);
 }
 @keyframes pop {
     0%   {transform: scale(0); }
-    50%  {transform: scale(1.2); }
+    50%  {transform: scale(1.1); }
     100% {transform: scale(1); }
 }
 
