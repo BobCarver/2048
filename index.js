@@ -63,13 +63,43 @@ doMove = async (direction) => {
         })
     })
     return addTile()
-}
+},
+reset = () => {
+    while(game.firstChild)
+        game.remove(game.firstChild)
 
-addTile()
-addTile()
+    addTile()
+    addTile()
+},
+
+threshold = 150, //required min distance traveled to be considered swipe
+restraint = 100, // maximum distance allowed at the same time in perpendicular direction
+allowedTime = 300, // maximum time allowed to travel that distance
+{ max, min, round, abs, PI, atan2} = Math
+
+game.addEventListener('touchstart', startEvent => {
+    startEvent.preventDefault();
+    game.addEventListener('touchend', e =>{
+        if( e.timestamp - startEvent.timestamp < allowedTime){
+            const
+            deltas = ['screenY','screenX'].map(v => e.targetTouches[0][v] - startEvent.targetTouches[0][v]),
+            absDeltas = deltas.map(e => Math.abs(e)),
+            dir = ['right','up','left', 'down'][round(atan2(...deltas)*2/PI)+1]
+
+            if( min(...absDeltas) < restraint && max(...absDeltas) > threshold ){
+                doMove(dir)
+            }
+        }
+        e.preventDefault()
+    },{once:true})
+})
+
+arrows.addEventListener('click', e=>doMove(e.target.id))
 
 document.addEventListener('keydown', event => {
     if( 0 == event.key.indexOf("Arrow")){
         doMove( event.key.slice(5).toLowerCase())
     }
 })
+
+
